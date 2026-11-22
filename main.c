@@ -191,7 +191,7 @@ int main(void)
 
     init_iop();
     sceCdInit(SCECdINIT);
-    sceCdMmode(SCECdCD);
+    sceCdMmode(SCECdMmodeCd);
     init_gfx();
     init_pad();
 
