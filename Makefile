@@ -1,7 +1,12 @@
 EE_BIN = taxi.elf
 EE_OBJS = main.o audsrv_irx.o
+
+GSKIT ?= $(PS2DEV)/gsKit
+EE_INCS += -I$(GSKIT)/include
+EE_LDFLAGS += -L$(GSKIT)/lib
 EE_LIBS = -lgskit -ldmakit -lpad -laudsrv -lcdvd -lpatches -lc -lkernel -lm
 EE_CFLAGS += -O2 -Wall
+
 BIN2C = $(PS2SDK)/bin/bin2c
 
 all: $(EE_BIN)
