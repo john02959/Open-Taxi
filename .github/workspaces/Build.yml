@@ -1,0 +1,28 @@
+name: Build Open Taxi
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build PS2 ELF
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/src" \
+            -w /src \
+            ps2dev/ps2dev:latest \
+            sh -c "apk add --no-cache make && make all"
+
+      - name: Upload blockblast.elf
+        uses: actions/upload-artifact@v4
+        with:
+          name: blockblast-ps2-elf
+          path: blockblast.elf
+          if-no-files-found: error
